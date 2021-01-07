@@ -1,0 +1,60 @@
+
+.gridContainer {
+    display: grid;
+    grid-template-columns: auto auto auto auto auto;
+    border: 8px solid #565454;
+    border-radius: 10px;
+    background-color: #1a1414;
+    margin: auto;
+    width: fit-content;
+    /*max-width: 200px;*/
+
+}
+
+.grid-item {
+    /*background-color: rgb(197, 197, 210);*/
+    background-color: rgb(238, 236, 236);
+    border: 1px solid #0f2567;
+    border-radius: 3px;
+    font-size: 15px;
+    font-weight: bolder;
+    text-align: center;
+    margin: 2px;
+    width: 23px;
+    height: 27px;
+}
+
+.ledBox {
+    grid-column-start: 1;
+    grid-column-end: 6;
+    background-color: #e9e4e4;
+    text-align: right;
+    border-radius: 3px;
+    margin-top: 3px;
+    margin-left: 3px;
+    margin-right: 3px;
+    margin-bottom: 8px;
+}
+
+button:hover {
+    background-color: #eed240;
+    cursor: pointer;
+    border-color: crimson;
+}
+
+.fontSmllHght {
+    font-size: 7px;
+    height: 20px;
+}
+
+.fontSmall {
+    font-size: 9px;
+}
+
+.operatorColor {
+    background-color: #8fd78b;
+}
+
+.redColor {
+    background-color: #de7a7a;
+}
