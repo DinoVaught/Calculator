@@ -17,3 +17,7 @@ function allClear() {
     mathBuild = new mathMaker();
     mathBuild.clearAll();
 }
+
+function changeOfSign() {
+    mathBuild.changeSign();
+}

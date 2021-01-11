@@ -1,10 +1,11 @@
 
 class mathMaker {
     constructor() {
-        this.evalEquation = '';
+        this.evalEquation = '0';
     }
 
     appendNumber(datum) {
+        if (this.evalEquation === '0') {this.evalEquation = ''}
         this.evalEquation += datum;
         // console.log(this.evalEquation);
         document.getElementById('ledPanel').innerText = this.evalEquation;
@@ -22,14 +23,50 @@ class mathMaker {
         if (this.evalEquation.length === 0) {
             return false;
         }
-        let len = this.evalEquation.length;
+        if (this.evalEquation.length > 2) {
+            return this.rightCharIsMathOperator(operator);
+        }
+            return true;
+    }
 
-        // [' / ',' * ',' - ',' + ']
-        console.log(this.evalEquation.substr(len - operator.length, operator.length));
+    rightCharIsMathOperator(operator) {
+        let len = this.evalEquation.length;
+        switch(this.evalEquation[len-2]) {
+            case '+': case '-': case '*': case '/':
+                return false;
+        }
         return true;
     }
 
-    evaluateEquation(){
+    changeSign() {
+
+        if (this.evalEquation === '0') {return;}
+
+        if (this.isNumber(this.evalEquation)) {
+            this.evalEquation = eval(this.evalEquation + ' * -1').toString();
+            document.getElementById('ledPanel').innerText = this.evalEquation;
+            return;
+        }
+
+        this.evalEquation = this.evalEquation.toString();
+        let evalChars = this.evalEquation.split(" ");
+
+        if (this.isNumber(evalChars[evalChars.length-1])) {
+
+            evalChars[evalChars.length-1] = eval(evalChars[evalChars.length-1] + ' *-1');
+
+            let tmp = '';
+            for (let i = 0; i < evalChars.length; i++) {
+                tmp += evalChars[i] + ' ';
+            }
+            tmp = tmp.substr(0, tmp.length - 1).toString(); // remove the last ' ' ;
+            this.evalEquation = tmp;
+            document.getElementById('ledPanel').innerText = this.evalEquation;
+        }
+
+
+    }
+    evaluateEquation() {
 
         if (eval(this.evalEquation) === undefined ) {return;} // invalid equation
 
@@ -48,6 +85,10 @@ class mathMaker {
     clearAll() {
         document.getElementById('ledPanel').innerText = '0';
         this.evalEquation = '';
+    }
+
+    isNumber(val) {
+        return !isNaN(val);
     }
 
 }
