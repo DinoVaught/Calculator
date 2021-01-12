@@ -5,11 +5,32 @@ class mathMaker {
     }
 
     appendNumber(datum) {
+
         if (this.evalEquation === '0') {this.evalEquation = ''}
+
+        if (datum === '0') {
+            if (this.paddingZerosLeft()) {return;}
+        }
+
         this.evalEquation += datum;
-        // console.log(this.evalEquation);
         document.getElementById('ledPanel').innerText = this.evalEquation;
     }
+    paddingZerosLeft() {
+        if (this.evalEquation === '0') {return false;}
+        if (this.evalEquation === '') {return false;}
+        let evalChars = this.evalEquation.split(" ");
+        // return (evalChars[evalChars.length-1].substr(0, 1) === '0');
+
+        switch (evalChars[evalChars.length-1].substr(0, 1)) {
+            case '0': case '':
+                return true;
+
+            default:
+                return false;
+        }
+
+    }
+
 
     appendOperator(datum) {
         datum = ` ${datum} `;
@@ -52,7 +73,7 @@ class mathMaker {
         let evalChars = this.evalEquation.split(" ");
 
         if (this.isNumber(evalChars[evalChars.length-1])) {
-
+            // change sign (+/-) of last element
             evalChars[evalChars.length-1] = eval(evalChars[evalChars.length-1] + ' *-1');
 
             let tmp = '';
@@ -72,8 +93,11 @@ class mathMaker {
 
         let evalResult = eval(this.evalEquation).toString();
         if (evalResult.indexOf('.') !== -1) {
-            let numDecs = evalResult.length;
-            numDecs -= (evalResult.indexOf('.') + 1);
+
+            let startPos = evalResult.indexOf('.') + 1;
+            let targetData = evalResult.substring(startPos);
+            let numDecs = targetData.length;
+
             if (numDecs > 4) {
                 evalResult = parseFloat(evalResult).toFixed(4).toString();
             }
@@ -82,12 +106,21 @@ class mathMaker {
         this.evalEquation = evalResult;
     }
 
+    squareRoot() {
+        if (this.isNumber(this.evalEquation) === false) {return;}
+        if (parseFloat(this.evalEquation) < 0 ) {return;}
+
+        this.evalEquation = Math.sqrt(parseFloat(this.evalEquation));
+        document.getElementById('ledPanel').innerText = this.evalEquation;
+    }
+
     clearAll() {
         document.getElementById('ledPanel').innerText = '0';
-        this.evalEquation = '';
+        this.evalEquation = '0';
     }
 
     isNumber(val) {
+        if (val === '') {return false;}
         return !isNaN(val);
     }
 

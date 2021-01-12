@@ -21,3 +21,7 @@ function allClear() {
 function changeOfSign() {
     mathBuild.changeSign();
 }
+
+function sqRoot() {
+    mathBuild.squareRoot();
+}
