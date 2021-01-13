@@ -1,4 +1,13 @@
 
+
+var specOperators = {
+    'plusMinus': '+/-',
+    'sqrRoot': 'sqr',
+    'percent': '%',
+    'multInverse': '1/x',
+
+};
+
 class mathMaker {
     constructor() {
         this.evalEquation = '0';
@@ -41,9 +50,15 @@ class mathMaker {
     }
 
     validateMathOperator(operator){
+        this.evalEquation = this.evalEquation.toString();
+
         if (this.evalEquation.length === 0) {
             return false;
         }
+        if (this.evalEquation === '0') {
+            return false;
+        }
+
         if (this.evalEquation.length > 2) {
             return this.rightCharIsMathOperator(operator);
         }
@@ -68,13 +83,71 @@ class mathMaker {
             document.getElementById('ledPanel').innerText = this.evalEquation;
             return;
         }
+        this.applySpecialOperator(specOperators.plusMinus);
+    }
 
+    squareRoot() {
+
+        if (this.evalEquation === '0') {return;}
+        if (this.isNumber(this.evalEquation)) {
+            this.evalEquation = Math.sqrt(parseFloat(this.evalEquation));
+            document.getElementById('ledPanel').innerText = this.evalEquation;
+            return;
+        }
+
+        this.applySpecialOperator(specOperators.sqrRoot);
+    }
+
+    percent() {
+
+        if (this.evalEquation === '0') {return;}
+        if (this.isNumber(this.evalEquation)) {
+            this.evalEquation = eval(this.evalEquation + ' / 100');
+            document.getElementById('ledPanel').innerText = this.evalEquation;
+            return;
+        }
+
+        this.applySpecialOperator(specOperators.percent);
+    }
+
+    multInverse() {
+        if (this.evalEquation === '0') {return;}
+        if (this.isNumber(this.evalEquation)) {
+            this.evalEquation = eval('1 / ' + this.evalEquation);
+            document.getElementById('ledPanel').innerText = this.evalEquation;
+            return;
+        }
+
+        this.applySpecialOperator(specOperators.multInverse);
+    }
+
+
+    applySpecialOperator(operator) {
         this.evalEquation = this.evalEquation.toString();
-        let evalChars = this.evalEquation.split(" ");
 
-        if (this.isNumber(evalChars[evalChars.length-1])) {
+        let evalChars = this.evalEquation.split(" ");
+        if (this.isNumber(evalChars[evalChars.length - 1])) {
+
             // change sign (+/-) of last element
-            evalChars[evalChars.length-1] = eval(evalChars[evalChars.length-1] + ' *-1');
+            switch (operator) {
+                case specOperators.plusMinus:
+                    evalChars[evalChars.length - 1] = eval(evalChars[evalChars.length - 1] + ' * -1');
+                    break;
+
+                case specOperators.sqrRoot:
+
+                    let num = Math.sqrt(parseFloat(evalChars[evalChars.length - 1]));
+                    evalChars[evalChars.length - 1] = num.toString();
+                    break;
+
+                case specOperators.percent:
+                    evalChars[evalChars.length - 1] = eval(evalChars[evalChars.length - 1] + ' / 100');
+                    break;
+
+                case specOperators.multInverse:
+                    evalChars[evalChars.length - 1] = eval('1 / ' + evalChars[evalChars.length - 1]);
+                    break;
+            }
 
             let tmp = '';
             for (let i = 0; i < evalChars.length; i++) {
@@ -84,9 +157,8 @@ class mathMaker {
             this.evalEquation = tmp;
             document.getElementById('ledPanel').innerText = this.evalEquation;
         }
-
-
     }
+
     evaluateEquation() {
 
         if (eval(this.evalEquation) === undefined ) {return;} // invalid equation
@@ -106,17 +178,17 @@ class mathMaker {
         this.evalEquation = evalResult;
     }
 
-    squareRoot() {
-        if (this.isNumber(this.evalEquation) === false) {return;}
-        if (parseFloat(this.evalEquation) < 0 ) {return;}
-
-        this.evalEquation = Math.sqrt(parseFloat(this.evalEquation));
-        document.getElementById('ledPanel').innerText = this.evalEquation;
-    }
-
-    clearAll() {
+    clearEntry() {
         document.getElementById('ledPanel').innerText = '0';
-        this.evalEquation = '0';
+        if (this.evalEquation === '0') {
+            return;
+        } else {
+            this.evalEquation = this.evalEquation.toString(); // this.evalEquation.substr is not a function
+            this.evalEquation = this.evalEquation.substr(0, this.evalEquation.length - 1);
+            if (this.evalEquation.length === 0) {this.evalEquation = '0';}
+            document.getElementById('ledPanel').innerText = this.evalEquation;
+
+        }
     }
 
     isNumber(val) {

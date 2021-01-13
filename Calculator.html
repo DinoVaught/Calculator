@@ -17,7 +17,7 @@
         <button class="grid-item fontSmllHght operatorColor">MR</button>
         <button class="grid-item fontSmllHght operatorColor">M+</button>
         <button class="grid-item fontSmllHght operatorColor">M-</button>
-        <button class="grid-item fontSmllHght redColor" onclick="allClear()" >AC</button>
+        <button class="grid-item fontSmllHght redColor" onclick="clearIt()" >CE</button>
 
         <button class="grid-item" onclick="appendNum('7')">7</button>
         <button class="grid-item" onclick="appendNum('8')">8</button>
@@ -31,13 +31,13 @@
         <button class="grid-item" onclick="appendNum('5')">5</button>
         <button class="grid-item" onclick="appendNum('6')">6</button>
         <button class="grid-item operatorColor" onclick="appendMathOperator('*')">&times</button>
-        <button class="grid-item operatorColor">&#65130</button> <!-- % -->
+        <button class="grid-item operatorColor" onclick="calcPercent()" >&#65130</button> <!-- % -->
 
         <button class="grid-item" onclick="appendNum('1')">1</button>
         <button class="grid-item" onclick="appendNum('2')">2</button>
         <button class="grid-item" onclick="appendNum('3')">3</button>
         <button class="grid-item operatorColor"  onclick="appendMathOperator('-')">&#8722</button> <!-- &minus (-) -->
-        <button class="grid-item operatorColor fontSmall">1/x</button>
+        <button class="grid-item operatorColor fontSmall" onclick="inverse()" >1/x</button>
 
         <button class="grid-item" onclick="appendNum('0')">0</button>
         <button class="grid-item" onclick="appendNum('.')">.</button>

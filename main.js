@@ -13,9 +13,8 @@ function equateMath() {
     mathBuild.evaluateEquation();
 }
 
-function allClear() {
-    mathBuild = new mathMaker();
-    mathBuild.clearAll();
+function clearIt() {
+    mathBuild.clearEntry();
 }
 
 function changeOfSign() {
@@ -25,3 +24,12 @@ function changeOfSign() {
 function sqRoot() {
     mathBuild.squareRoot();
 }
+
+function calcPercent() {
+    mathBuild.percent();
+}
+
+function inverse() {
+    mathBuild.multInverse();
+}
+//  Inverse
