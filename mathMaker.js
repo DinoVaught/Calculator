@@ -1,6 +1,4 @@
-
-
-var specOperators = {
+const specOperators = {
     'plusMinus': '+/-',
     'sqrRoot': 'sqr',
     'percent': '%',
@@ -49,7 +47,7 @@ class mathMaker {
         document.getElementById('ledPanel').innerText = this.evalEquation;
     }
 
-    validateMathOperator(operator){
+    validateMathOperator(){
         this.evalEquation = this.evalEquation.toString();
 
         if (this.evalEquation.length === 0) {
@@ -60,12 +58,12 @@ class mathMaker {
         }
 
         if (this.evalEquation.length > 2) {
-            return this.rightCharIsMathOperator(operator);
+            return this.rightCharIsMathOperator();
         }
             return true;
     }
 
-    rightCharIsMathOperator(operator) {
+    rightCharIsMathOperator() {
         let len = this.evalEquation.length;
         switch(this.evalEquation[len-2]) {
             case '+': case '-': case '*': case '/':
@@ -90,7 +88,7 @@ class mathMaker {
 
         if (this.evalEquation === '0') {return;}
         if (this.isNumber(this.evalEquation)) {
-            this.evalEquation = Math.sqrt(parseFloat(this.evalEquation));
+            this.evalEquation = Math.sqrt(parseFloat(this.evalEquation)).toString();
             document.getElementById('ledPanel').innerText = this.evalEquation;
             return;
         }
@@ -128,7 +126,6 @@ class mathMaker {
         let evalChars = this.evalEquation.split(" ");
         if (this.isNumber(evalChars[evalChars.length - 1])) {
 
-            // change sign (+/-) of last element
             switch (operator) {
                 case specOperators.plusMinus:
                     evalChars[evalChars.length - 1] = eval(evalChars[evalChars.length - 1] + ' * -1');
@@ -136,8 +133,9 @@ class mathMaker {
 
                 case specOperators.sqrRoot:
 
-                    let num = Math.sqrt(parseFloat(evalChars[evalChars.length - 1]));
-                    evalChars[evalChars.length - 1] = num.toString();
+                    // let num = Math.sqrt(parseFloat(evalChars[evalChars.length - 1]));
+                    // evalChars[evalChars.length - 1] = num.toString();
+                    evalChars[evalChars.length - 1] = Math.sqrt(parseFloat(evalChars[evalChars.length - 1])).toString();
                     break;
 
                 case specOperators.percent:
@@ -187,7 +185,6 @@ class mathMaker {
             this.evalEquation = this.evalEquation.substr(0, this.evalEquation.length - 1);
             if (this.evalEquation.length === 0) {this.evalEquation = '0';}
             document.getElementById('ledPanel').innerText = this.evalEquation;
-
         }
     }
 
