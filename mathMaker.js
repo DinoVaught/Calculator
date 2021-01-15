@@ -3,8 +3,9 @@ const specOperators = {
     'sqrRoot': 'sqr',
     'percent': '%',
     'multInverse': '1/x',
-
 };
+
+let ledBackColor;
 
 class mathMaker {
     constructor() {
@@ -17,17 +18,48 @@ class mathMaker {
 
         if (datum === '0') {
             if (this.paddingZerosLeft()) {return;}
+        } else {
+            if (this.evalEquation !== '') {
+                let evalChars = this.evalEquation.split(" ");
+                let targetChars = evalChars[evalChars.length -1];
+                if (targetChars !== undefined) {
+                    if (targetChars.substr(0, 1) === '0') {
+                        this.evalEquation = this.evalEquation.substr(0, this.evalEquation.length -1);
+                    }
+                }
+            }
+
+            // if (this.evalEquation.substr(this.evalEquation.length -1) === '0') {
+            //     this.evalEquation = this.evalEquation.substr(0, this.evalEquation.length -1);
+            // }
         }
 
         this.evalEquation += datum;
         document.getElementById('ledPanel').innerText = this.evalEquation;
     }
+
+    appendDec() {
+        if (this.evalEquation === '0') {
+            this.evalEquation = '.';
+            document.getElementById('ledPanel').innerText = this.evalEquation;
+        } else {
+            let evalChars = this.evalEquation.split(" ");
+            let targetData = evalChars[evalChars.length -1]
+            if (targetData.indexOf('.') > -1) {
+                this.flashLed();
+            } else {
+                this.evalEquation += '.';
+                document.getElementById('ledPanel').innerText = this.evalEquation;
+            }
+        }
+    }
+
     paddingZerosLeft() {
         if (this.evalEquation === '0') {return false;}
         if (this.evalEquation === '') {return false;}
-        let evalChars = this.evalEquation.split(" ");
-        // return (evalChars[evalChars.length-1].substr(0, 1) === '0');
+        if (this.evalEquation.substr(this.evalEquation.length -1) === ' ') {return;}
 
+        let evalChars = this.evalEquation.split(" ");
         switch (evalChars[evalChars.length-1].substr(0, 1)) {
             case '0': case '':
                 return true;
@@ -132,9 +164,6 @@ class mathMaker {
                     break;
 
                 case specOperators.sqrRoot:
-
-                    // let num = Math.sqrt(parseFloat(evalChars[evalChars.length - 1]));
-                    // evalChars[evalChars.length - 1] = num.toString();
                     evalChars[evalChars.length - 1] = Math.sqrt(parseFloat(evalChars[evalChars.length - 1])).toString();
                     break;
 
@@ -158,22 +187,29 @@ class mathMaker {
     }
 
     evaluateEquation() {
-
-        if (eval(this.evalEquation) === undefined ) {return;} // invalid equation
-
-        let evalResult = eval(this.evalEquation).toString();
-        if (evalResult.indexOf('.') !== -1) {
-
-            let startPos = evalResult.indexOf('.') + 1;
-            let targetData = evalResult.substring(startPos);
-            let numDecs = targetData.length;
-
-            if (numDecs > 4) {
-                evalResult = parseFloat(evalResult).toFixed(4).toString();
+        try {
+            if (eval(this.evalEquation) === undefined ) {return;} // invalid equation
+            let evalResult = eval(this.evalEquation).toString();
+            if (evalResult.indexOf('Infinity') !== -1) {
+                this.flashLed();
+                return;
             }
+            if (evalResult.indexOf('.') !== -1) {
+
+                let startPos = evalResult.indexOf('.') + 1;
+                let targetData = evalResult.substring(startPos);
+                let numDecs = targetData.length;
+
+                if (numDecs > 4) {
+                    evalResult = parseFloat(evalResult).toFixed(4).toString();
+                }
+            }
+            document.getElementById('ledPanel').innerText = evalResult.toString();
+            this.evalEquation = evalResult;
         }
-        document.getElementById('ledPanel').innerText = evalResult.toString();
-        this.evalEquation = evalResult;
+        catch(err) {
+            this.flashLed();
+        }
     }
 
     clearEntry() {
@@ -182,10 +218,32 @@ class mathMaker {
             return;
         } else {
             this.evalEquation = this.evalEquation.toString(); // this.evalEquation.substr is not a function
-            this.evalEquation = this.evalEquation.substr(0, this.evalEquation.length - 1);
+
+            if (this.evalEquation.substr(this.evalEquation.length - 1) === ' ') {
+                this.evalEquation = this.evalEquation.substr(0, this.evalEquation.length - 3);
+            } else {
+                this.evalEquation = this.evalEquation.substr(0, this.evalEquation.length - 1);
+            }
+
+
             if (this.evalEquation.length === 0) {this.evalEquation = '0';}
             document.getElementById('ledPanel').innerText = this.evalEquation;
         }
+    }
+
+    clearAll() {
+        this.evalEquation = '';
+        document.getElementById('ledPanel').innerText = '0';
+    }
+
+    flashLed() {
+
+        // ledBackColor = document.getElementById('ledPanel').style.backgroundColor;
+        document.getElementById('ledPanel').style.backgroundColor = "#fa0505";
+        setTimeout(this.resetLed, 200);
+    }
+    resetLed() {
+        document.getElementById('ledPanel').style.backgroundColor = ledBackColor;
     }
 
     isNumber(val) {

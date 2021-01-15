@@ -6,6 +6,10 @@
     <link rel="stylesheet" type="text/css" href="Calculator.css">
     <script src="mathMaker.js"></script>
     <script src="main.js"></script>
+<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
+<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
+<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
+
 
 </head>
 <body>
@@ -17,7 +21,7 @@
         <button class="grid-item fontSmllHght operatorColor">MR</button>
         <button class="grid-item fontSmllHght operatorColor">M+</button>
         <button class="grid-item fontSmllHght operatorColor">M-</button>
-        <button class="grid-item fontSmllHght redColor" onclick="clearIt()" >CE</button>
+        <button class="grid-item fontSmllHght redColor" onmousedown="mouseDownClear()" onmouseup="mouseUpClear()" onclick="clearIt()" >CE</button>
 
         <button class="grid-item" onclick="appendNum('7')">7</button>
         <button class="grid-item" onclick="appendNum('8')">8</button>
@@ -40,7 +44,7 @@
         <button class="grid-item operatorColor fontSmall" onclick="inverse()" >1/x</button>
 
         <button class="grid-item" onclick="appendNum('0')">0</button>
-        <button class="grid-item" onclick="appendNum('.')">.</button>
+        <button class="grid-item" onclick="appendDec('.')">.</button>
         <button class="grid-item fontSmall" onclick="changeOfSign()">+/-</button>
         <button class="grid-item operatorColor" onclick="appendMathOperator('+')">+</button>
         <button class="grid-item operatorColor" onclick="equateMath()" >=</button>

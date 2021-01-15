@@ -1,8 +1,13 @@
 
+let longMousePress = false;
 let mathBuild = new mathMaker();
 
 function appendNum(datum) {
     mathBuild.appendNumber(datum);
+}
+
+function appendDec() {
+    mathBuild.appendDec();
 }
 
 function appendMathOperator(datum) {
@@ -32,4 +37,23 @@ function calcPercent() {
 function inverse() {
     mathBuild.multInverse();
 }
-//  Inverse
+function pageLoad() {
+    ledBackColor = document.getElementById('ledPanel').style.backgroundColor;
+}
+
+function mouseDownClear() {
+    longMousePress = true;
+    setTimeout(clearAll, 1000);
+}
+
+function mouseUpClear() {
+    longMousePress = false;
+}
+
+function clearAll() {
+    if (longMousePress === false) {return;}
+    mathBuild.clearAll();
+    mathBuild = new mathMaker();
+}
+
+window.addEventListener('load', pageLoad);
