@@ -5,8 +5,6 @@ const specOperators = {
     'multInverse': '1/x',
 };
 
-let ledBackColor;
-
 class mathMaker {
     constructor() {
         this.evalEquation = '0';
@@ -238,17 +236,15 @@ class mathMaker {
 
     flashLed() {
 
-        // ledBackColor = document.getElementById('ledPanel').style.backgroundColor;
         document.getElementById('ledPanel').style.backgroundColor = "#fa0505";
         setTimeout(this.resetLed, 200);
     }
     resetLed() {
-        document.getElementById('ledPanel').style.backgroundColor = ledBackColor;
+        document.getElementById('ledPanel').style.backgroundColor = '';
     }
 
     isNumber(val) {
         if (val === '') {return false;}
         return !isNaN(val);
     }
-
 }

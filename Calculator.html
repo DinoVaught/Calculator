@@ -6,53 +6,49 @@
     <link rel="stylesheet" type="text/css" href="Calculator.css">
     <script src="mathMaker.js"></script>
     <script src="main.js"></script>
-<!--    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">-->
-<!--    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>-->
-<!--    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>-->
 
 
 </head>
+<!--  KeyDown="resolveKeyCode(event)" -->
+<!-- onkeypress="resolveKeyCode(event)" -->
 <body>
 
-    <div class="gridContainer">
+    <div class="gridContainer" >
         <div id='ledPanel' class="ledBox">0</div>
 
         <button class="grid-item fontSmllHght operatorColor" >MC</button>
         <button class="grid-item fontSmllHght operatorColor">MR</button>
         <button class="grid-item fontSmllHght operatorColor">M+</button>
         <button class="grid-item fontSmllHght operatorColor">M-</button>
-        <button class="grid-item fontSmllHght redColor" onmousedown="mouseDownClear()" onmouseup="mouseUpClear()" onclick="clearIt()" >CE</button>
+        <button id="ce" class="grid-item fontSmllHght redColor" onmousedown="mouseDownClear()" onmouseup="mouseUpClear()" onclick="clearEntry()" >CE</button>
 
-        <button class="grid-item" onclick="appendNum('7')">7</button>
-        <button class="grid-item" onclick="appendNum('8')">8</button>
-        <button class="grid-item" onclick="appendNum('9')">9</button>
-        <button class="grid-item operatorColor" onclick="appendMathOperator('/')">&divide</button>
+        <button id="7" class="grid-item" onclick="appendNum('7')">7</button>
+        <button id="8" class="grid-item" onclick="appendNum('8')">8</button>
+        <button id="9" class="grid-item" onclick="appendNum('9')">9</button>
+        <button id="/" class="grid-item operatorColor" onclick="appendMathOperator('/')">&divide</button>
 <!--        <button class="grid-item operatorColor" onclick="appendMathOperator('/')">/</button>-->
 <!--        <button class="grid-item operatorColor" onclick="appendMathOperator('÷')">÷</button>-->
         <button class="grid-item operatorColor" onclick="sqRoot()" >&#x221A</button> <!-- sq root -->
 
-        <button class="grid-item" onclick="appendNum('4')">4</button>
-        <button class="grid-item" onclick="appendNum('5')">5</button>
-        <button class="grid-item" onclick="appendNum('6')">6</button>
-        <button class="grid-item operatorColor" onclick="appendMathOperator('*')">&times</button>
-        <button class="grid-item operatorColor" onclick="calcPercent()" >&#65130</button> <!-- % -->
+        <button id="4" class="grid-item" onclick="appendNum('4')">4</button>
+        <button id="5"  class="grid-item" onclick="appendNum('5')">5</button>
+        <button id="6" class="grid-item" onclick="appendNum('6')">6</button>
+        <button id="*" class="grid-item operatorColor" onclick="appendMathOperator('*')">&times</button>
+        <button class="grid-item operatorColor padLeftPrcnt" onclick="calcPercent()" >&#65130</button> <!-- % -->
 
-        <button class="grid-item" onclick="appendNum('1')">1</button>
-        <button class="grid-item" onclick="appendNum('2')">2</button>
-        <button class="grid-item" onclick="appendNum('3')">3</button>
-        <button class="grid-item operatorColor"  onclick="appendMathOperator('-')">&#8722</button> <!-- &minus (-) -->
-        <button class="grid-item operatorColor fontSmall" onclick="inverse()" >1/x</button>
+        <button id="1"  class="grid-item" onclick="appendNum('1')">1</button>
+        <button id="2" class="grid-item" onclick="appendNum('2')">2</button>
+        <button id="3"  class="grid-item" onclick="appendNum('3')">3</button>
+        <button id="-" class="grid-item operatorColor"  onclick="appendMathOperator('-')">&#8722</button> <!-- &minus (-) -->
+        <button class="grid-item operatorColor fontSmall padLeftPlusMinus" onclick="inverse()" >1/x</button>
 
-        <button class="grid-item" onclick="appendNum('0')">0</button>
-        <button class="grid-item" onclick="appendDec('.')">.</button>
-        <button class="grid-item fontSmall" onclick="changeOfSign()">+/-</button>
-        <button class="grid-item operatorColor" onclick="appendMathOperator('+')">+</button>
-        <button class="grid-item operatorColor" onclick="equateMath()" >=</button>
-
+        <button id="0" class="grid-item" onclick="appendNum('0')">0</button>
+        <button id="dec" class="grid-item" onclick="appendDec('.')">.</button>
+        <button class="grid-item fontSmall padLeftPlusMinus" onclick="changeOfSign()">+/-</button>
+        <button id="+" class="grid-item operatorColor" onclick="appendMathOperator('+')">+</button>
+        <button id="=" class="grid-item operatorColor" onclick="equateMath()" >=</button>
 
     </div>
-
-
 
 </body>
 </html>

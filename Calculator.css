@@ -59,7 +59,13 @@ button:hover {
 .operatorColor {
     background-color: #8fd78b;
 }
+.padLeftPrcnt {
+    padding-left: 3px;
+}
 
+.padLeftPlusMinus {
+    padding-left: 5px;
+}
 .redColor {
     background-color: #de7a7a;
 }
