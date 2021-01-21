@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <title>Calculator </title>
     <link rel="stylesheet" type="text/css" href="Calculator.css">
+    <script src="keyPressHandler.js"></script>
+    <script src="memoryHandler.js"></script>
     <script src="mathMaker.js"></script>
     <script src="main.js"></script>
 
@@ -16,18 +18,16 @@
     <div class="gridContainer" >
         <div id='ledPanel' class="ledBox">0</div>
 
-        <button class="grid-item fontSmllHght operatorColor" >MC</button>
-        <button class="grid-item fontSmllHght operatorColor">MR</button>
-        <button class="grid-item fontSmllHght operatorColor">M+</button>
-        <button class="grid-item fontSmllHght operatorColor">M-</button>
+        <button class="grid-item fontSmllHght operatorColor" onclick="memoryClear()">MC</button>
+        <button class="grid-item fontSmllHght operatorColor" onclick="memoryRecall()">MR</button>
+        <button class="grid-item fontSmllHght operatorColor" onclick="memoryPlus()">M+</button>
+        <button class="grid-item fontSmllHght operatorColor" onclick="memoryMinus()">M-</button>
         <button id="ce" class="grid-item fontSmllHght redColor" onmousedown="mouseDownClear()" onmouseup="mouseUpClear()" onclick="clearEntry()" >CE</button>
 
         <button id="7" class="grid-item" onclick="appendNum('7')">7</button>
         <button id="8" class="grid-item" onclick="appendNum('8')">8</button>
         <button id="9" class="grid-item" onclick="appendNum('9')">9</button>
         <button id="/" class="grid-item operatorColor" onclick="appendMathOperator('/')">&divide</button>
-<!--        <button class="grid-item operatorColor" onclick="appendMathOperator('/')">/</button>-->
-<!--        <button class="grid-item operatorColor" onclick="appendMathOperator('÷')">÷</button>-->
         <button class="grid-item operatorColor" onclick="sqRoot()" >&#x221A</button> <!-- sq root -->
 
         <button id="4" class="grid-item" onclick="appendNum('4')">4</button>
