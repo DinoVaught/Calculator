@@ -1,5 +1,9 @@
 
-let longMousePress = false;
+const timeSpans = {
+    'current': 0,
+    'mouseDown': 0
+};
+
 let keyPressColor = "#f5e242";
 let mathBuild = new mathMaker();
 let memory = new memoryHandler();
@@ -32,22 +36,22 @@ function calcPercent() {
     mathBuild.percent();
 }
 
-function inverse() {
+funRewrote the keyUp and keyDown functions
+Coded background-color (reset) to empty strings '', apparently setting the background color back to its (css specified) colorction inverse() {
     mathBuild.multInverse();
 }
 
-
 function mouseDownClear() {
-    longMousePress = true;
+
+    timeSpans.mouseDown = new Date().getTime();
     setTimeout(clearAll, 1000);
 }
 
-function mouseUpClear() {
-    longMousePress = false;
-}
-
 function clearAll() {
-    if (longMousePress === false) {return;}
+
+    timeSpans.current = new Date().getTime()
+    if ((timeSpans.current - timeSpans.mouseDown) < 1000) {return;}
+
     mathBuild.clearAll();
     mathBuild = new mathMaker();
 }
@@ -82,4 +86,12 @@ function memoryMinus() {
         memory.memoryMinus(val);
     }
 
+}
+
+function wasteTime(ms) {
+    const start = new Date().getTime();
+    let end = start;
+    while (end < start + ms) {
+        end = new Date().getTime();
+    }
 }
