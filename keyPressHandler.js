@@ -1,3 +1,4 @@
+let keyPressColor = "#f5e242";
 
 function keyUp(e) {
 
