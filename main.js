@@ -62,6 +62,7 @@ function clearAll() {
 
     mathBuild.clearAll();
     mathBuild = new mathMaker();
+    mathBuild.flashLed('#b5b5b5')
 }
 
 function clearEntry() {

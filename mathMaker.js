@@ -234,9 +234,9 @@ class mathMaker {
         document.getElementById('ledPanel').innerText = '0';
     }
 
-    flashLed() {
+    flashLed(backColor = "#fa0505" ) {
 
-        document.getElementById('ledPanel').style.backgroundColor = "#fa0505";
+        document.getElementById('ledPanel').style.backgroundColor = backColor;
         setTimeout(this.resetLed, 200);
     }
     resetLed() {
