@@ -76,7 +76,7 @@ function memoryClear() {
 }
 
 function memoryRecall() {
-    mathBuild.clearAll();
+    // mathBuild.clearAll();
     document.getElementById('ledPanel').innerText = memory.memoryValue;
     mathBuild.appendNumber(memory.memoryValue);
 }

@@ -16,7 +16,9 @@ body {
     background-color: #1a1414;
     margin: auto;
     /*width: fit-content;*/
-    max-width: 135px;
+    /*max-width: 135px;*/
+    max-width: 237px;
+
 
 }
 
@@ -25,12 +27,17 @@ body {
     background-color: #c9c8c8;
     border: 1px solid #0f2567;
     border-radius: 3px;
-    font-size: 15px;
+    /*font-size: 15px;*/
+    font-size: 40px;
     font-weight: bolder;
     text-align: center;
     margin: 2px;
-    width: 23px;
-    height: 27px;
+    /*width: 23px;*/
+    /*height: 27px;*/
+
+    width: 43px;
+    height: 50px;
+
 }
 
 .ledBox {
@@ -40,12 +47,14 @@ body {
     font-family: Arial, serif;
     font-weight: bold;
     text-align: right;
+    font-size: 17px;
     border-radius: 3px;
     margin: 3px 3px 8px;
     padding-right: 2px;
     white-space: nowrap;
     /*white-space: pre-line;*/
-    max-width: 127px;
+    /*max-width: 127px;*/
+    max-width: 230px;
     overflow: hidden;
     text-overflow: ellipsis;
 }
@@ -57,12 +66,12 @@ button:hover {
 }
 
 .fontSmllHght {
-    font-size: 7px;
+    font-size: 14px;
     height: 20px;
 }
 
 .fontSmall {
-    font-size: 9px;
+    font-size: 17px;
 }
 
 .operatorColor {
